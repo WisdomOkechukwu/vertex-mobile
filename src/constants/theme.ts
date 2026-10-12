@@ -1,30 +1,31 @@
 /**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
+ * The app's colour palette, in light and dark mode. `ExtraColors` carries every Vertex design token
+ * (`--bg`, `--fg`, `--card`, `--acc`, the washes, the `on*` inks) and supplies `background`/`text`
+ * itself, so this file is now just the light/dark split.
+ *
+ * The Expo template's `backgroundElement`/`backgroundSelected`/`textSecondary` used to sit here for
+ * "framework-level surfaces"; nothing ever used them, and they only widened `ThemeColor` with keys
+ * no screen could meaningfully ask for.
  */
 
 import '@/global.css';
 
 import { Platform } from 'react-native';
 
+import { ExtraColors } from '@/constants/colors';
+
 export const Colors = {
-  light: {
-    text: '#000000',
-    background: '#ffffff',
-    backgroundElement: '#F0F0F3',
-    backgroundSelected: '#E0E1E6',
-    textSecondary: '#60646C',
-  },
-  dark: {
-    text: '#ffffff',
-    background: '#000000',
-    backgroundElement: '#212225',
-    backgroundSelected: '#2E3135',
-    textSecondary: '#B0B4BA',
-  },
+  light: ExtraColors.light,
+  dark: ExtraColors.dark,
 } as const;
 
 export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
+
+export * from '@/constants/colors';
+export * from '@/constants/layout';
+export * from '@/constants/radius';
+export * from '@/constants/shadows';
+export * from '@/constants/typography';
 
 export const Fonts = Platform.select({
   ios: {
